@@ -2,10 +2,7 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y git
-
-# REQUIRED: public GitHub repo link (not zed-base)
-RUN git clone https://github.com/rajkamalsomavarapu2000/ml-explainability-pack.git
+COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 

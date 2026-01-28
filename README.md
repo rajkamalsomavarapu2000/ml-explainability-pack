@@ -16,8 +16,13 @@ This repository provides a minimal machine learning service that supports:
 - Partial dependence plots
 - Explainability report generation
 
-## Running locally
+## Running with Docker
+
+Build and run the container:
 
 ```bash
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+docker build -t ml-explainability-pack .
+docker run -p 8000:8000 ml-explainability-pack
+```
+
+Open http://localhost:8000 in your browser to access the UI.

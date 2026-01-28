@@ -3,44 +3,70 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ML Model UI (Shabby)</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <title>ML Model Explainability</title>
+  <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
-  <div class="wrap">
-    <h1>ML Model UI (Shabby)</h1>
-    <p class="muted">Train a model, then predict using JSON features. This is intentionally minimal.</p>
+  <header>
+    <h1>ML Model Explainability</h1>
+  </header>
+  <div class="container">
+    <div class="panel">
+      <h2>Datasets</h2>
+      <input type="file" id="csvFile" accept=".csv" />
+      <button id="uploadBtn">Upload CSV</button>
+      <div id="uploadOut" class="output">Select a CSV file...</div>
+      <ul id="datasetsList"></ul>
+    </div>
 
-    <section class="card">
-      <h2>1) Train</h2>
-      <button id="trainBtn">Train Model</button>
-      <pre id="trainOut" class="out">Click "Train Model"...</pre>
-    </section>
+    <div class="panel">
+      <h2>Train Model</h2>
+      <label>Dataset</label>
+      <select id="datasetSelect">
+        <option value="sample">Sample Data</option>
+      </select>
+      <label>Model Type</label>
+      <select id="modelType">
+        <option value="logistic">Logistic Regression</option>
+        <option value="random_forest">Random Forest</option>
+        <option value="kmeans">K-Means Clustering</option>
+      </select>
+      <label>Target Column</label>
+      <select id="targetColumn" disabled>
+        <option value="">Select target</option>
+      </select>
+      <button id="trainBtn">Train</button>
+      <div id="trainOut" class="output">Ready to train...</div>
+    </div>
 
-    <section class="card">
-      <h2>2) Predict</h2>
+    <div class="panel">
+      <h2>Models</h2>
+      <ul id="modelsList"></ul>
+    </div>
 
-      <label class="label">Model ID</label>
-      <input id="modelId" class="input" placeholder="Paste model_id from training output" />
-
-      <label class="label">Payload (JSON)</label>
-      <textarea id="payload" class="textarea" rows="7">
-{"feature1": 1.2, "feature2": 0.3, "feature3": 5.1}
-      </textarea>
-
+    <div class="panel">
+      <h2>Predict</h2>
+      <label>Model ID</label>
+      <input id="modelId" placeholder="Select a model" />
+      <label>Payload (JSON)</label>
+      <textarea id="payload" rows="5">{"feature1": 1.2, "feature2": 0.3, "feature3": 5.1}</textarea>
       <button id="predictBtn">Predict</button>
-      <pre id="predictOut" class="out">Waiting...</pre>
-    </section>
+      <div id="predictOut" class="output">Waiting...</div>
+    </div>
 
-    <section class="card">
-      <h2>Quick Notes</h2>
-      <ul>
-        <li>Endpoints used: <code>POST /train</code> and <code>POST /predict/{model_id}</code></li>
-        <li>Open API docs: <a href="/docs" target="_blank">/docs</a></li>
-      </ul>
-    </section>
+    <div class="panel">
+      <h2>Explainability</h2>
+      <label>Model ID</label>
+      <input id="explainModelId" placeholder="Select a model" />
+      <button id="globalExplainBtn">Generate Global Explanation</button>
+      <div id="globalExplainOut" class="output"></div>
+      <label>Row Index</label>
+      <input id="explainRowIndex" type="number" value="0" />
+      <button id="localExplainBtn">Generate Local Explanation</button>
+      <div id="localExplainOut" class="output"></div>
+    </div>
   </div>
 
-  <script src="/app.js"></script>
+  <script src="/static/app.js"></script>
 </body>
 </html>
