@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ML Model UI (Shabby)</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <h1>ML Model UI (Shabby)</h1>
+    <p class="muted">Train a model, then predict using JSON features. This is intentionally minimal.</p>
+
+    <section class="card">
+      <h2>1) Train</h2>
+      <button id="trainBtn">Train Model</button>
+      <pre id="trainOut" class="out">Click "Train Model"...</pre>
+    </section>
+
+    <section class="card">
+      <h2>2) Predict</h2>
+
+      <label class="label">Model ID</label>
+      <input id="modelId" class="input" placeholder="Paste model_id from training output" />
+
+      <label class="label">Payload (JSON)</label>
+      <textarea id="payload" class="textarea" rows="7">
+{"feature1": 1.2, "feature2": 0.3, "feature3": 5.1}
+      </textarea>
+
+      <button id="predictBtn">Predict</button>
+      <pre id="predictOut" class="out">Waiting...</pre>
+    </section>
+
+    <section class="card">
+      <h2>Quick Notes</h2>
+      <ul>
+        <li>Endpoints used: <code>POST /train</code> and <code>POST /predict/{model_id}</code></li>
+        <li>Open API docs: <a href="/docs" target="_blank">/docs</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
